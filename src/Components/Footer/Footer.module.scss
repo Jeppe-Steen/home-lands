@@ -1,0 +1,49 @@
+@import "../../_scss/variables";
+@import "../../_scss/mixins";
+
+.pageFooter {
+    width: 100%;
+    height: 20vh;
+    background: $color-black;
+    @include flexDirection(row);
+    position: relative;
+
+    align-items: center;
+
+    color: $color-white;
+
+    .pageFooter_logo {
+        font-size: 2.5rem;
+        position: absolute;
+        left: 60px;
+        font-family: $font-logo, sans-serif;
+    }
+
+    .pageFooter_list {
+        position: absolute;
+        list-style: none;
+        font-family: $font-else, sans-serif;
+
+        &:first-of-type {
+            left: 360px;
+        }
+
+        &:last-of-type {
+            left: 560px;
+        }
+    }
+
+    .pageFooter_socialIcons {
+        @include flexDirection(row);
+        position: absolute;
+        right: 60px;
+
+        p {
+            margin-left: 10px;
+
+            &:first-child {
+                margin: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+.heroSlider {
+    width: 100%;
+    height: 60vh;
+    background-color: lightcoral;
+    position: relative;
+
+    .heroSlider_figure {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+
+        .heroSlider_img {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .heroSlider_figcap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 50px;
+            background-color: lightcoral;
+        }
+    }
+
+    .heroSlider_dotsSpan {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: row;
+
+        .heroSlider_dots {
+            width: 30px;
+            height: 30px;
+            background-color: #ffffff50;
+            border-radius: 50%;
+            margin: 0 5px;
+
+            &.active {
+                background-color: green;
+            }
+        }
+    }
+}

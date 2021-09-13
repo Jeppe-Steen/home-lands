@@ -1,0 +1,28 @@
+@import '../../_scss/mixins';
+@import '../../_scss/variables';
+
+.listItem {
+    width: 400px;
+    height: 300px;
+    background: $color-white-alpha;
+    border-radius: $border-radius;
+
+    box-shadow: $border-shadow;
+
+    @include flexDirection(column);
+
+    padding: 20px 40px;
+    cursor: pointer;
+
+    &:hover {
+        background: #D9C5E0aa;
+        transform: scale(1.1);
+        padding: 31px 55px;
+    }
+
+    img {
+        width: 100%;
+        background: lightgreen;
+        height: 50%;
+    }
+}
