@@ -2,7 +2,7 @@
 @import '../../_scss/variables';
 
 .frontPage {
-    padding-top: 10vh;
+    margin-top: 10vh;
 
     .frontPage_preview {
         width: 100%;
@@ -42,20 +42,6 @@
             justify-content: center;
             padding: 20px 0;
         }
-
-        .frontPage_reviews_review {
-            width: 100%;
-            background: $color-rosa;
-            @include flexDirection(column);
-            align-items: center;
-            text-align: center;
-
-            padding: 40px 100px;
-
-            p {
-                margin: 20px 0;
-            }
-        }
     }
 
     .frontPage_employees {
@@ -68,22 +54,6 @@
             align-items: center;
             justify-content: center;
             padding: 20px 0;
-        }
-
-        .frontPage_employees_list {
-            width: 100%;
-            list-style: none;
-            
-            @include flexDirection(row);
-            justify-content: center;
-
-            li {
-                margin-left: 40px;
-
-                &:first-child {
-                    margin: unset;
-                }
-            }
         }
     }
 }

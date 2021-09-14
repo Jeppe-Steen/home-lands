@@ -6,32 +6,69 @@ import Style from './Frontpage.module.scss';
 // Components
 import { HeroSlider } from '../../Components/HeroSlider/HeroSlider';
 import { ListItems } from '../../Components/ListItems/ListItems';
-import { EmployeesItem } from '../../Components/EmployeesItem/EmployeesItem';
 
 // Helpers
 import { doFetch } from '../../Helpers/Fetching';
+import { EmployeesList } from '../../Components/EmployeesList/EmployeesList';
+import { Reviews } from '../../Components/Reviews/Reviews';
+import { useContext } from 'react/cjs/react.development';
+import { AppContext } from '../../Context/ContextProvider';
 
 const Frontpage = () => {
-    const [employees, setEmployees] = useState([]);
-    const [houses, setHouses] = useState([]);
+    const [selectedHouses, setSelectedHouses] = useState([]);
+    const [reviews, setReviews] = useState([]);
+    const [selectedIndex, setSelectedIndex] = useState(0);
 
-    const getEmployees = async () => {
-        const url = `https://api.mediehuset.net/homelands/staff`;
-        const response = await doFetch(url);
-        setEmployees(response);
-    }
 
-    const getHouses = async () => {
+    const getSelectedHouses = async () => {
         const url = `https://api.mediehuset.net/homelands/homes`;
         const response = await doFetch(url);
 
-        const slicedArray = response.slice(0,3)
-        setHouses(slicedArray);
-    } 
+        const arr = [];
+        const uniqueNumber = getUniqueNumbers();
+        uniqueNumber.forEach(number => arr.push(response[number]));
+        setSelectedHouses(arr);
+    }
+
+    const getReviews = async () => {
+        const url = `https://api.mediehuset.net/homelands/reviews`;
+        const response = await doFetch(url);
+        setReviews(response);
+    }
+
+    const getUniqueNumbers = () => {
+        const arrOfNumbers = [];
+        const quantity = 3;
+        const max = 10;
+
+        // while the array's length isn't as long as we want, this function will run.
+        while (arrOfNumbers.length < quantity) {
+            const randomNumber = Math.floor(Math.random() * max);
+
+            // indexOf checks if the randomNumber is already in the array, and if it isn't it will push the randomNumber to the array.
+            if(arrOfNumbers.indexOf(randomNumber) === -1) { arrOfNumbers.push(randomNumber) }
+        }
+
+        return arrOfNumbers;
+    }
+
+    const timer = () => {
+        if(selectedIndex >= reviews.length - 1) {
+            setSelectedIndex(0)
+        } else {
+            setSelectedIndex(selectedIndex + 1)
+        }
+    }
 
     useEffect(() => {
-        getEmployees();
-        getHouses();
+        getSelectedHouses();
+        getReviews();
+        setSelectedIndex(0);
+
+        setInterval(() => {
+            timer();
+        }, 1500);
+        return () => clearInterval(); 
     }, [])
 
     return (
@@ -40,10 +77,10 @@ const Frontpage = () => {
 
             <section className={Style.frontPage_preview}>
                 <ul className={Style.frontPage_preview_list}>
-                    {houses.length ? houses.map((house, index) => {
+                    {selectedHouses.length ? selectedHouses.map((house, index) => {
                         return (
-                            <li>
-                                <ListItems key={index} data={house} />
+                            <li key={index}>
+                                <ListItems data={house} />
                             </li>
                         )
                     }) : null}
@@ -54,26 +91,18 @@ const Frontpage = () => {
                 <header>
                     <h2>Det siger kunderne:</h2>
                 </header>
-                <article className={Style.frontPage_reviews_review}>
-                    <header><h3>Something important here..</h3></header>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, enim. Libero sint possimus inventore consequuntur consequatur. Ab, aspernatur, recusandae ea ullam hic minus aliquam accusamus, labore vel illum unde eligendi.</p>
-                    <footer>Barack Obama, September 2021</footer>
-                </article>
+                {reviews.length ? reviews.map((review, index) => {
+                    return (
+                        <Reviews key={index} data={review} style={selectedIndex === index ? true : false } />
+                    )
+                }) : null}
             </section>
 
             <section className={Style.frontPage_employees}>
                 <header>
                     <h2>Mød vores ansatte</h2>
                 </header>
-                <ul className={Style.frontPage_employees_list}>
-                    {employees.length ? employees.map((employee, index) => {
-                        return (
-                            <li>
-                                <EmployeesItem key={index} data={employee} />
-                            </li>
-                        )
-                    }): null}
-                </ul>
+                <EmployeesList />
             </section>
         </main>
     )

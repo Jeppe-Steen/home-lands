@@ -1,0 +1,57 @@
+@import '../../_scss/variables';
+@import '../../_scss/mixins';
+
+.loginPage {
+    margin-top: 20vh;
+    padding: 0 100px;
+
+    .loginPage_header {
+        padding: 40px 0;
+
+        h2 {
+            margin-bottom: 10px;
+        }
+    }
+
+    .loginPage_form {
+        width: 40%;
+        height: fit-content;
+
+        @include flexDirection(column);
+
+        .loginPage_form_span {
+            @include flexDirection(column);
+            margin-bottom: 20px;
+
+            label {
+                margin-bottom: 10px;
+            }
+
+            input {
+                padding: 10px 15px;
+                border: 1px solid black;
+            }
+        }
+
+        .loginPage_button_span {
+            @include flexDirection(row);
+
+            button {
+                padding: 10px 15px;
+                margin-right: 15px;
+                color: $color-white;
+                border: none;
+                background: $color-black;
+
+                &:hover {
+                    transform: scale(1.1);
+                    cursor: pointer;
+                }
+
+                &:first-child {
+                    background: #222;
+                }
+            }
+        }
+    }
+}

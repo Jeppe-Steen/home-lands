@@ -1,0 +1,46 @@
+@import '../../_scss/variables';
+
+.adminPage {
+    margin-top: 20vh;
+
+    .adminPage_header {
+        padding: 40px 100px;
+        width: 100%;
+    }
+
+    .adminPage_section {
+        width: 100%;
+        display: grid;
+        grid-template: auto auto / 60% 40%;
+        grid-template-areas: 'reviews login' 'liked login';
+
+        padding: 0 100px;
+
+        .adminPage_section_reviews { grid-area: reviews; }
+        .adminPage_section_liked { grid-area: liked; }
+        .adminPage_section_login { 
+            grid-area: login; 
+            border-left: 1px solid black; 
+            padding-left: 40px; 
+
+            button {
+                padding: 10px 15px;
+                border: none;
+                background: $color-black;
+                color: $color-white;
+                border-radius: $border-radius;
+                box-shadow: $border-shadow;
+                margin-top: 10px;
+
+                &:hover {
+                    transform: scale(1.1);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        article {
+            min-height: 30vh;
+        }
+    }
+}

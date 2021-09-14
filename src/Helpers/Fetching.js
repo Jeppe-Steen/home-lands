@@ -14,7 +14,9 @@ export const doFetch = async (fetchUrl, fetchMethod = 'GET', fetchData = null, f
         return data.items
     } else if(data.item) {
         return data.item
-    } else if(data){
-        return data
+    } else if(data.error){
+        return []
+    } else if(data) {
+        return data;
     }
 }

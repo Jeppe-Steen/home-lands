@@ -25,7 +25,7 @@ function App() {
         <Route exact path="/Udvalg" component={Catalogpage} />
         <Route exact path="/Udvalg/:Address" component={Detailspage} />
         <Route exact path="/Login" component={Loginpage} />
-        <Route exact path="/Bruger" component={Adminpage} />
+        <Route exact path="/Admin" component={Adminpage} />
 
         <Footer />
       </BrowserRouter>

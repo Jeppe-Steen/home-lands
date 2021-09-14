@@ -1,0 +1,18 @@
+@import '../../_scss/mixins';
+@import '../../_scss/variables';
+
+.employeesList {
+    width: 100%;
+    list-style: none;
+    
+    @include flexDirection(row);
+    justify-content: center;
+
+    li {
+        margin-left: 40px;
+
+        &:first-child {
+            margin: unset;
+        }
+    }
+}

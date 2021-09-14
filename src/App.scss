@@ -11,3 +11,8 @@ main {
   width: 100%;
   font-family: $font-else, sans-serif;
 }
+
+.error_message {
+  margin-top: 5px;
+  color: red;
+}

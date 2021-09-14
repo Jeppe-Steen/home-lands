@@ -1,50 +1,58 @@
+@import '../../_scss/variables';
+
 .heroSlider {
     width: 100%;
     height: 60vh;
-    background-color: lightcoral;
     position: relative;
 
-    .heroSlider_figure {
+    .heroSlider_image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 100%;
-        height: 100%;
-        overflow: hidden;
-        position: relative;
 
-        .heroSlider_img {
-            width: 100%;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+        opacity: 0;
+        visibility: hidden;
 
-        .heroSlider_figcap {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 10px 50px;
-            background-color: lightcoral;
+        &.active {
+            transition: opacity 1s ease-in-out;
+            visibility: visible;
+            opacity: 1;
         }
     }
 
-    .heroSlider_dotsSpan {
+    button {
         position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: row;
+        top: 50%;
+        transform: translateY(-50%);
 
-        .heroSlider_dots {
-            width: 30px;
-            height: 30px;
-            background-color: #ffffff50;
-            border-radius: 50%;
-            margin: 0 5px;
+        width: 70px;
+        height: 70px;
 
-            &.active {
-                background-color: green;
-            }
+        border-radius: 50%;
+        border: 5px solid black;
+        background-color: transparent;
+
+        &:hover {
+            cursor: pointer;
         }
+    }
+
+    .prev {
+        background-image: url(../../Assets/ArrowLeft.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30%;
+
+        left: 60px;
+    }
+    .next {
+        background-image: url(../../Assets/ArrowRight.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 30%;
+
+        right: 60px;
     }
 }

@@ -14,15 +14,46 @@
     padding: 20px 40px;
     cursor: pointer;
 
+    position: relative;
+
     &:hover {
         background: #D9C5E0aa;
         transform: scale(1.1);
-        padding: 31px 55px;
     }
 
-    img {
+    .listItem_image {
         width: 100%;
-        background: lightgreen;
         height: 50%;
+    }
+
+    .listItem_caption {
+        margin-top: 10px;
+
+        .listItem_header {
+            margin-bottom: 5px;
+        }
+
+        .listItem_tekst {
+        }
+
+        .listItem_data {
+            @include flexDirection(row);
+            align-items: flex-end;
+            justify-content: space-between;
+
+            margin-top: 10px;
+
+            .listItem_data_label {
+                padding: 5px 10px;
+                background: green;
+                color: $color-white;
+
+            }
+
+            .listItem_data_price {
+                font-weight: 700;
+            }
+
+        }
     }
 }

@@ -1,59 +1,54 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Style from './HeroSlider.module.scss'
 
+import {doFetch} from '../../Helpers/Fetching';
+
 const HeroSlider = () => {
-    const [selectedImage, setSelectedImage] = useState({});
-    const [imageArr, setImageArr] = useState([]);
+    const [imageArray, setImageArray] = useState([]);
+    const [sliderIndex, setSliderIndex] = useState(0);
 
-    const imageArray = [
-        { id: 0, title: 'this', selected: true, src: 'https://ironcodestudio.com/wp-content/uploads/2015/03/css-remove-horizontal-scrollbar.jpg' },
-        { id: 1, title: 'is', selected: false, src: 'https://cdn.pixabay.com/photo/2017/05/08/08/08/landscape-2294711_960_720.jpg' },
-        { id: 2, title: 'awesome', selected: false, src: 'https://www.investopedia.com/thmb/16FgGW3XMVGQ-4w4epjfT0VIMuw=/680x0/filters:no_upscale():max_bytes(150000):strip_icc()/merger_jigsaw-5bfc2fc646e0fb0051be9cb6.jpg' }
-    ];
-
-    const timer = 2000;
-    let imageIndex = 0;
-
-    const changeDotColor = (val) => {
-        imageArray.forEach(image => image.selected = false);
-        imageArray[val].selected = true;
-
-        setImageArr(imageArray);
+    const getImages = async () => {
+        const url = `https://api.mediehuset.net/homelands/images`
+        const response = await doFetch(url);
+        setImageArray(response);
     }
 
-    const timedSliderFunction = () => {
-        if(imageIndex <= imageArray.length - 2) {
-            imageIndex = imageIndex + 1;
-        } else if (imageIndex >= imageArray.length - 1) {
-            imageIndex = 0;
+    const handleButton = (val) => {
+
+        switch(val) {
+            default:
+                break;
+            case 'next':
+                if(sliderIndex >= imageArray.length - 1) {
+                    setSliderIndex(0);
+                } else {
+                    setSliderIndex(sliderIndex + 1);
+                }
+                break;
+            case 'prev':
+                if(sliderIndex <= 0) {
+                    setSliderIndex(imageArray.length - 1)
+                } else {
+                    setSliderIndex(sliderIndex - 1)
+                }
+                break;
         }
-        
-        changeDotColor(imageIndex)
-        setSelectedImage(imageArray[imageIndex]);
     }
-
+    
     useEffect(() => {
-        changeDotColor(imageIndex)
-        setSelectedImage(imageArray[0])
-        setInterval(timedSliderFunction, timer);
-        clearInterval();
+        getImages();
     }, [])
 
     return (
         <section className={Style.heroSlider}>
-            <figure className={Style.heroSlider_figure}>
-                <img className={Style.heroSlider_img} src={selectedImage.src} alt="" />
-                <figcaption className={Style.heroSlider_figcap}>
-                    <h1 className={Style.heroSlider_h1}> {selectedImage.title} </h1>
-                </figcaption>
-            </figure>
-            { /*<div className={Style.heroSlider_dotsSpan}>
-                {imageArr && imageArr.map((dot, index) => {
-                 return (
-                    <div key={index} className={dot.selected ? `${Style.heroSlider_dots} ${Style.active}` : Style.heroSlider_dots}></div>
-                 )   
-                })}
-            </div> */}
+            {imageArray.length ? imageArray.map((image, index) => {
+                return (
+                    <img key={index} className={sliderIndex === index ? `${Style.heroSlider_image} ${Style.active}` : `${Style.heroSlider_image}`} src={image.image[1]} alt={image.filename} />
+                )
+            }) : null}
+
+            <button onClick={() => handleButton('prev')} className={Style.prev} type="button"></button>
+            <button onClick={() => handleButton('next')} className={Style.next} type="button"></button>
         </section>
     )
 }
