@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 // Style
 import Style from './Frontpage.module.scss';
@@ -11,13 +11,19 @@ import { ListItems } from '../../Components/ListItems/ListItems';
 import { doFetch } from '../../Helpers/Fetching';
 import { EmployeesList } from '../../Components/EmployeesList/EmployeesList';
 import { Reviews } from '../../Components/Reviews/Reviews';
-import { useContext } from 'react/cjs/react.development';
 import { AppContext } from '../../Context/ContextProvider';
+import { useHistory } from 'react-router';
+import { Modal } from '../../Components/Modal/Modal';
 
 const Frontpage = () => {
     const [selectedHouses, setSelectedHouses] = useState([]);
     const [reviews, setReviews] = useState([]);
-    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    const timeoutRef = useRef(null);
+    const [ sliderIndex, setSliderIndex ] = useState(0);
+
+    const { loginData, setModalActive } = useContext(AppContext);
+    const history = useHistory();
 
 
     const getSelectedHouses = async () => {
@@ -52,24 +58,33 @@ const Frontpage = () => {
         return arrOfNumbers;
     }
 
-    const timer = () => {
-        if(selectedIndex >= reviews.length - 1) {
-            setSelectedIndex(0)
-        } else {
-            setSelectedIndex(selectedIndex + 1)
+    const resetTimeout = () => {
+        if(timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
         }
     }
+
+    const handleClick = () => {
+        if(!loginData.user_id) {
+            history.push('/Login')
+        } else { setModalActive(true); };
+    }
+
 
     useEffect(() => {
         getSelectedHouses();
         getReviews();
-        setSelectedIndex(0);
-
-        setInterval(() => {
-            timer();
-        }, 1500);
-        return () => clearInterval(); 
+        setSliderIndex(1);
     }, [])
+
+    useEffect(() => {
+        resetTimeout();
+        timeoutRef.current = setTimeout(() => {
+            setSliderIndex((prevIndex) => prevIndex >= reviews.length - 1 ? 0 : prevIndex + 1)
+        }, [2000])
+
+        return () => resetTimeout();
+    }, [sliderIndex])
 
     return (
         <main className={Style.frontPage}>
@@ -88,14 +103,15 @@ const Frontpage = () => {
             </section>
 
             <section className={Style.frontPage_reviews}>
-                <header>
+                <header className={Style.frontPage_reviews_header} >
                     <h2>Det siger kunderne:</h2>
                 </header>
                 {reviews.length ? reviews.map((review, index) => {
                     return (
-                        <Reviews key={index} data={review} style={selectedIndex === index ? true : false } />
+                        <Reviews key={index} data={review} style={sliderIndex === index ? true : false } />
                     )
                 }) : null}
+                <button onClick={handleClick} type="button">{loginData.user_id ? 'Skriv en anmeldelse her' : 'Login for at skrive en anmeldelse'}</button>
             </section>
 
             <section className={Style.frontPage_employees}>
@@ -104,6 +120,8 @@ const Frontpage = () => {
                 </header>
                 <EmployeesList />
             </section>
+            
+            <Modal />
         </main>
     )
 }

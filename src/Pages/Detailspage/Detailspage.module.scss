@@ -1,0 +1,110 @@
+@import '../../_scss/variables';
+@import '../../_scss/mixins';
+
+.detailsPage {
+    margin-top: 10vh;
+
+    display: flex;
+    min-height: 150vh;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+
+    &.active {
+        min-height: 180vh;
+    }
+
+    .detailsPage_information {
+        width: 100%;
+
+        min-height: 500px;
+
+        position: relative;
+
+        .detailsPage_information_wrapper {
+            width: 80%;
+            background: $color-white-alpha;
+            min-height: 400px;
+
+            position: absolute;
+            top: -140px;
+            left: 50%;
+            transform: translatex(-50%);
+
+            padding: 25px 40px;
+
+            border-radius: $border-radius;
+            box-shadow: $border-shadow;
+
+            .detailsPage_information_wrapper_header {
+                @include flexDirection(row);
+                justify-content: space-between;
+                align-items: flex-start;
+
+                position: relative;
+
+                span:nth-child(2) {
+                    @include flexDirection(row);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
+                    & > div {
+                        margin: 0 10px;
+
+                        height: 70px;
+                        width: 70px;
+                        padding: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        background: $color-white-alpha;
+                        border: 1px solid $color-black-alpha;
+                        fill: $color-black-alpha;
+
+                        &:hover {
+                            cursor: pointer;
+                            border: 1px solid $color-black;
+                            fill: $color-black;
+                        }
+                    }
+                }
+                
+                span:nth-child(3) {
+                    @include flexDirection(column);
+                    align-items: flex-end;
+                }
+            }
+
+            .information {
+                width: 100%;
+                min-height: fit-content;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-top: 40px;
+                gap: 100px;
+
+                .information_text {
+                    width: 90%;
+                }
+                
+                .information_contact {
+                    width: 300px;
+                    height: fit-content;
+
+                    header {
+                        font-size: 1.5rem;
+                    }
+
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

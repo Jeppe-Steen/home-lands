@@ -8,8 +8,18 @@
     @include flexDirection(row);
     justify-content: center;
 
+    @media (max-width: $breakpoint-laptop) {
+        @include flexDirection(column);
+        align-items: center;
+    }
+
     li {
         margin-left: 40px;
+
+        @media (max-width: $breakpoint-laptop) {
+            margin-left: unset;
+            margin-top: 20px;
+        }
 
         &:first-child {
             margin: unset;

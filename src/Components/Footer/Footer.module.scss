@@ -12,11 +12,22 @@
 
     color: $color-white;
 
+    @media (max-width: $breakpoint-laptop) {
+        height: 400px;
+        @include flexDirection(column);
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
     .pageFooter_logo {
         font-size: 2.5rem;
         position: absolute;
         left: 60px;
         font-family: $font-logo, sans-serif;
+
+        @media (max-width: $breakpoint-laptop) {
+            position: unset;
+        }
     }
 
     .pageFooter_list {
@@ -24,12 +35,24 @@
         list-style: none;
         font-family: $font-else, sans-serif;
 
+        @media (max-width: $breakpoint-laptop) {
+            text-align: center;
+        }
+
         &:first-of-type {
             left: 360px;
+
+            @media (max-width: $breakpoint-laptop) {
+                position: unset;
+            }
         }
 
         &:last-of-type {
             left: 560px;
+
+            @media (max-width: $breakpoint-laptop) {
+                position: unset;
+            }
         }
     }
 
@@ -37,6 +60,10 @@
         @include flexDirection(row);
         position: absolute;
         right: 60px;
+
+        @media (max-width: $breakpoint-laptop) {
+            position: unset;
+        }
 
         p {
             margin-left: 10px;

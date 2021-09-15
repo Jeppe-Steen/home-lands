@@ -2,6 +2,8 @@
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { useEffect } from 'react/cjs/react.development';
+import { MyLiked } from '../../Components/MyLiked/MyLiked';
+import { MyReviews } from '../../Components/MyReviews/MyReviews';
 import { AppContext } from '../../Context/ContextProvider';
 import Style from './Adminpage.module.scss';
 
@@ -17,8 +19,10 @@ const Adminpage = () => {
 
     const handleLogout = () => {
         setLoginData({});
+        sessionStorage.clear();
         history.push('/Forside');
     }
+
 
     return (
         <main className={Style.adminPage}>
@@ -31,11 +35,13 @@ const Adminpage = () => {
                     <header>
                         <h3>Anmeldelser</h3>
                     </header>
+                    <MyReviews />
                 </article>
                 <article className={Style.adminPage_section_liked}>
                     <header>
                         <h3>Favoritter</h3>
                     </header>
+                    <MyLiked />
                 </article>
                 <aside className={Style.adminPage_section_login}> 
                     <p>Du er nu logget ind som <strong>{loginData.username}</strong></p>

@@ -1,14 +1,10 @@
 @import '../_scss/variables';
+.camera, .location, .plan, .heart {
+    width: 30px;
+    height: 30px;
+}
 
 .heart {
-    position: absolute;
-    top: 160px;
-    right: 40px;
-    width: 35px;
-    height: 35px;
-
-    fill: $color-black-alpha;
-
     &:hover {
         fill: $color-black;
     }

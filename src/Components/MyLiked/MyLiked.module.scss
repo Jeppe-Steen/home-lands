@@ -1,0 +1,29 @@
+.myLiked {
+    margin-top: 10px;
+    width: 90%;
+    height: fit-content;
+    
+    tr {
+        display: grid;
+        grid-template-columns: 50% 30% 20%;
+        text-align: start;
+        padding: 5px 0;
+        border-bottom: 1px solid grey;
+
+        th {
+            text-align: start;
+        }
+
+        &:first-child {
+            border-bottom: 1px solid black;;
+        }
+
+        td {
+            text-align: start;
+
+            & > * {
+                width: 48%;
+            }
+        }
+    }
+}

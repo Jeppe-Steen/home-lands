@@ -4,12 +4,22 @@
 .frontPage {
     margin-top: 10vh;
 
+    @media (max-width: $breakpoint-laptop) {
+        margin-top: 20vh;
+    }
+
     .frontPage_preview {
         width: 100%;
         height: 45vh;
         background: $color-white;
 
         position: relative;
+
+        @media (max-width: $breakpoint-laptop) {
+            width: 100%;
+            position: unset;
+            min-height: 1250px;
+        }
 
         .frontPage_preview_list {
             width: fit-content;
@@ -22,8 +32,29 @@
 
             list-style: none;
 
+            @media (max-width: $breakpoint-laptop) {
+                @include flexDirection(column);
+                width: 90%;
+                height: fit-content;
+
+                top: unset;
+                left: 50%;
+                transform: translateX(-50%);
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                padding: 20px 0;
+            }
+
             li {
                 margin-left: 40px;
+
+                @media (max-width: $breakpoint-laptop) {
+                    margin-left: unset;
+                    margin-top: 20px;
+                }
 
                 &:first-child {
                     margin: unset;
@@ -35,12 +66,35 @@
     .frontPage_reviews {
         width: 100%;
         @include flexDirection(column);
+        background: $color-rosa;
+        align-items: center;
 
-        h2 {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 0;
+        padding-bottom: 20px;
+
+        .frontPage_reviews_header {
+            background: $color-white;
+            width: 100%;
+
+            h2 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px 0;
+            }
+        }
+
+        button {
+            padding: 15px 20px;
+            color: $color-white;
+            background: $color-black;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 350px;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
 

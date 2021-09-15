@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { AppContext } from '../../Context/ContextProvider';
 
@@ -6,10 +6,9 @@ import { AppContext } from '../../Context/ContextProvider';
 import Style from './Navigation.module.scss';
 
 const Navigation = () => {
-    const { loginData } = useContext(AppContext);
+    const { loginData, setSearchData } = useContext(AppContext);
+    const [toggleMenu, setToggleMenu] = useState(false);
     const history = useHistory();
-
-    const { setSearchData } = useContext(AppContext);
 
     const goToFrontpage = () => {
         history.push('/Forside');
@@ -24,8 +23,13 @@ const Navigation = () => {
     const search = () => {
         setSearchData(search_input);
         document.getElementById('search').value = '';
+        toggelingMenu();
 
         history.push('/Udvalg');
+    }
+
+    const toggelingMenu = () => {
+        setToggleMenu(!toggleMenu);
     }
 
 
@@ -36,18 +40,18 @@ const Navigation = () => {
                 <h1>HomeLands</h1>
             </div>
 
-            <nav className={Style.pageNavigation_nav}>
+            <nav className={toggleMenu ? `${Style.pageNavigation_nav} ${Style.active}` : Style.pageNavigation_nav}>
                 <ul className={Style.pageNavigation_list}>
                     <li className={Style.pageNavigation_linkItem}> 
-                        <Link className={Style.pageNavigation_linkItem_link} to="/Forside"> Forside </Link> 
+                        <Link onClick={toggelingMenu} className={Style.pageNavigation_linkItem_link} to="/Forside"> Forside </Link> 
                     </li>
 
                     <li className={Style.pageNavigation_linkItem}> 
-                        <Link className={Style.pageNavigation_linkItem_link} to="/Udvalg"> Boliger tilsalg </Link> 
+                        <Link onClick={toggelingMenu} className={Style.pageNavigation_linkItem_link} to="/Udvalg"> Boliger tilsalg </Link> 
                     </li>
 
                     <li className={Style.pageNavigation_linkItem}> 
-                        <Link className={Style.pageNavigation_linkItem_link} to="/Login"> {loginData.user_id ? 'Admin' : 'Login'} </Link>
+                        <Link onClick={toggelingMenu} className={Style.pageNavigation_linkItem_link} to="/Login"> {loginData.user_id ? 'Admin' : 'Login'} </Link>
                     </li>
                     <li className={Style.pageNavigation_linkItem}>
                         <span className={Style.pageNavigation_linkItem_span}>
@@ -58,7 +62,7 @@ const Navigation = () => {
                 </ul>
             </nav>
 
-            <div></div>
+            <div onClick={toggelingMenu} className={Style.pageNavigation_menu}>toggle</div>
         </header>
     )
 }

@@ -7,6 +7,8 @@ const HeroSlider = () => {
     const [imageArray, setImageArray] = useState([]);
     const [sliderIndex, setSliderIndex] = useState(0);
 
+    const timeoutRef = useRef(null);
+
     const getImages = async () => {
         const url = `https://api.mediehuset.net/homelands/images`
         const response = await doFetch(url);
@@ -14,7 +16,6 @@ const HeroSlider = () => {
     }
 
     const handleButton = (val) => {
-
         switch(val) {
             default:
                 break;
@@ -37,7 +38,24 @@ const HeroSlider = () => {
     
     useEffect(() => {
         getImages();
+        setSliderIndex(1);
     }, [])
+
+    const resetTimeout = () => {
+        if(timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+    }
+
+    useEffect(() => {
+        resetTimeout();
+        timeoutRef.current = setTimeout(() => {
+            setSliderIndex((prevIndex) => 
+                prevIndex >= imageArray.length - 1 ? 0 : prevIndex + 1
+            )
+        }, 2000);
+        return () => { resetTimeout(); };
+    }, [sliderIndex]);
 
     return (
         <section className={Style.heroSlider}>

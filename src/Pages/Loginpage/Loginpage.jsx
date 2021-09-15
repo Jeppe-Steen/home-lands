@@ -46,14 +46,20 @@ const Loginpage = () => {
             formData.append('password', loginFormData.password);
 
             const response = await doFetch(url, 'POST', formData);
-            if(!response.message) { setLoginData(response); }
+            if(!response.user_id) { checkInfo(); } 
+            else { 
+                setLoginData(response); 
+                history.push('/Admin'); 
+
+                const data = JSON.stringify(response, null, 2);
+                sessionStorage.setItem('access_token', data);
+            }
     };
 
     const checkInfo = () => {
         const form = document.getElementById('form');
 
         if(!loginData.user_id) { handleError(form, 'Brugernavn eller adgangskode er forkert'); }
-        else { history.push('/Admin') }
     };
 
     const submitForm = () => {
@@ -71,7 +77,6 @@ const Loginpage = () => {
 
         if(!hasError) {
             handleLogin();
-            checkInfo();
         }
     };
 

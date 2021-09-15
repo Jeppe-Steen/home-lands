@@ -16,9 +16,18 @@
 
     position: relative;
 
+    @media (max-width: $breakpoint-laptop) {
+        width: 100%;
+        height: fit-content;
+    }
+
     &:hover {
         background: #D9C5E0aa;
         transform: scale(1.1);
+
+        @media (max-width: $breakpoint-laptop) {
+            transform: unset;
+        }
     }
 
     .listItem_image {
@@ -43,9 +52,13 @@
 
             margin-top: 10px;
 
+            @media (max-width: $breakpoint-laptop) {
+                @include flexDirection(column);
+                align-items: flex-start;
+            }
+
             .listItem_data_label {
                 padding: 5px 10px;
-                background: green;
                 color: $color-white;
 
             }

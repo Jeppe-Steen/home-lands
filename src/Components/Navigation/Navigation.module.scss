@@ -22,6 +22,11 @@
         width: 100%;
         height: 100%;
         clip-path: polygon(100% 0, 100% 100%, 30% 60%, 0 100%, 0 0);
+
+        @media (max-width: $breakpoint-laptop) {
+            height: 20vh;
+            clip-path: none;
+        }
     }
 
     .pageNavigation_logo {
@@ -37,6 +42,12 @@
         z-index: 9001;
 
         cursor: pointer;
+
+        @media (max-width: $breakpoint-laptop) {
+            font-size: 1.1rem;
+            left: 20px;
+            z-index: 9999;
+        }
     }
 
     .pageNavigation_nav {
@@ -45,6 +56,25 @@
         z-index: 9002;
         font-family: $font-logo, sans-serif;
 
+        @media (max-width: $breakpoint-laptop) {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            display: none;
+
+            &.active {
+                display: flex;
+            }
+        }
 
         .pageNavigation_list {
             list-style: none;
@@ -52,9 +82,19 @@
             @include flexDirection(row);
             align-items: center;
 
+            @media (max-width: $breakpoint-laptop) {
+                @include flexDirection(column);
+                width: 100%;
+            }
+
             .pageNavigation_linkItem {
                 color: $color-white;
                 padding: 0 20px 0 0;
+
+                @media (max-width: $breakpoint-laptop) {
+                    margin: 10px 0;
+                    padding: unset;
+                }
 
                 &:last-child {
                     padding: 0;
@@ -64,6 +104,10 @@
                     text-decoration: none;
                     color: $color-white;
                     font-size: 1.5rem;
+
+                    @media (max-width: $breakpoint-laptop) {
+                        font-size: 2rem;
+                    }
 
                     &:hover {
                         color: $color-brown;
@@ -76,6 +120,12 @@
                     width: 200px;
                     height: 30px;
                     font-family: $font-else, sans-serif;
+
+                    @media (max-width: $breakpoint-laptop) {
+                        width: 300px;
+                        height: 50px;
+                        font-size: 1.3rem;
+                    }
 
                     input {
                         width: 80%;
@@ -96,6 +146,20 @@
                     }
                 }
             }
+        }
+    }
+
+    .pageNavigation_menu {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 40px;
+        z-index: 9999;
+        color: white;
+        display: none;
+
+        @media (max-width: $breakpoint-laptop) {
+            display: unset;
         }
     }
 }

@@ -4,32 +4,25 @@
 
 .review_disable {
     width: 100%;
+    height: 25vh;
     background: $color-rosa;
+
     @include flexDirection(column);
     align-items: center;
     text-align: center;
+    justify-content: center;
     
     display: none;
+    padding: 0 60px;
 
-    padding: 40px 100px;
-
+    @media (max-width: $breakpoint-laptop) {
+        height: 40vh;
+    }
     &.review_active {
-        display: unset;
+        display: flex;
     }
 
     p {
         margin: 20px 0;
-    }
-
-    button {
-        padding: 15px 20px;
-        color: $color-white;
-        background: $color-black;
-        border: none;
-        cursor: pointer;
-        text-transform: uppercase;
-        &:hover {
-            transform: scale(1.1);
-        }
     }
 }
