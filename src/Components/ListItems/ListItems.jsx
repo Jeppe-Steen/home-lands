@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 
 // Style
 import Style from './ListItems.module.scss';
@@ -9,7 +9,6 @@ import { AppContext } from '../../Context/ContextProvider';
 
 // Assets
 import { Heart } from '../../Assets/Heart';
-import { useEffect } from 'react/cjs/react.development';
 
 const ListItems = (props) => {
     const data = props.data;
@@ -18,14 +17,21 @@ const ListItems = (props) => {
     const {setSelectedHouse, loginData } = useContext(AppContext);
 
     const [energyColor, setEnergyColor] = useState('');
+    const [price, setPrice] = useState('');
 
     const handleClick = () => {
         setSelectedHouse(data);
         history.push(`/Udvalg/${data.address}`);
     };
 
+    const formatPrice = () => {
+        const formattetPrice = data.price.replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        setPrice(formattetPrice);
+    }
+
     useEffect(() => {
         setEnergyColor(data.energy_label_name);
+        formatPrice();
     }, []);
 
     return (
@@ -38,7 +44,7 @@ const ListItems = (props) => {
                 <span className={Style.listItem_data}>
                     <div className={`${Style.listItem_data_label} ${energyColor}`}>{data.energy_label_name}</div>
                     <p className={Style.listItem_data_tekst}>{data.num_rooms} værelser, {data.floor_space}m2</p>
-                    <p className={Style.listItem_data_price}>{data.price} DKK</p>
+                    <p className={Style.listItem_data_price}>{price} DKK</p>
                 </span>
             </figcaption>
             {loginData.user_id ? <Heart id={data.id} /> : null}

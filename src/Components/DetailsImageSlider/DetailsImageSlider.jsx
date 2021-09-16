@@ -1,5 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
+
+// Style
 import Style from './DetailsImageSlider.module.scss';
 
 const DetailsImageSlider = () => {

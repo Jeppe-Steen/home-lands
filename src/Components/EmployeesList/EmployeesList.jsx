@@ -1,7 +1,12 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
+// Helpers 
 import { doFetch } from '../../Helpers/Fetching';
+
+// Style
 import Style from './EmployeesList.module.scss';
+
+// Components
 import { EmployeesItem } from '../../Components/EmployeesItem/EmployeesItem';
 
 const EmployeesList = () => {

@@ -9,6 +9,11 @@
 
     fill: $color-black-alpha;
 
+    @media (max-width: $breakpoint-laptop) {
+        top: unset;
+        bottom: 25px;
+    }
+
     &:hover {
         fill: $color-black;
     }

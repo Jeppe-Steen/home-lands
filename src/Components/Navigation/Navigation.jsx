@@ -1,9 +1,14 @@
 import { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
 
 // Style
 import Style from './Navigation.module.scss';
+
+// Components
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 
 const Navigation = () => {
     const { loginData, setSearchData } = useContext(AppContext);
@@ -29,7 +34,7 @@ const Navigation = () => {
     }
 
     const toggelingMenu = () => {
-        setToggleMenu(!toggleMenu);
+        setToggleMenu(false);
     }
 
 
@@ -62,7 +67,7 @@ const Navigation = () => {
                 </ul>
             </nav>
 
-            <div onClick={toggelingMenu} className={Style.pageNavigation_menu}>toggle</div>
+            <BurgerMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
         </header>
     )
 }

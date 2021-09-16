@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router';
 
 // Style
 import Style from './Frontpage.module.scss';
@@ -6,14 +7,15 @@ import Style from './Frontpage.module.scss';
 // Components
 import { HeroSlider } from '../../Components/HeroSlider/HeroSlider';
 import { ListItems } from '../../Components/ListItems/ListItems';
+import { EmployeesList } from '../../Components/EmployeesList/EmployeesList';
+import { Reviews } from '../../Components/Reviews/Reviews';
+import { Modal } from '../../Components/Modal/Modal';
 
 // Helpers
 import { doFetch } from '../../Helpers/Fetching';
-import { EmployeesList } from '../../Components/EmployeesList/EmployeesList';
-import { Reviews } from '../../Components/Reviews/Reviews';
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
-import { useHistory } from 'react-router';
-import { Modal } from '../../Components/Modal/Modal';
 
 const Frontpage = () => {
     const [selectedHouses, setSelectedHouses] = useState([]);

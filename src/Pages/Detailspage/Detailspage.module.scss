@@ -10,8 +10,16 @@
     align-items: center;
     padding-bottom: 40px;
 
+    @media (max-width: $breakpoint-laptop) {
+        margin-top: 10vh;
+    }
+
     &.active {
         min-height: 180vh;
+
+        @media (max-width: $breakpoint-laptop) {
+            min-height: 160vh;
+        }
     }
 
     .detailsPage_information {
@@ -20,6 +28,10 @@
         min-height: 500px;
 
         position: relative;
+
+        @media (max-width: $breakpoint-laptop) {
+            min-height: 300vh;
+        }
 
         .detailsPage_information_wrapper {
             width: 80%;
@@ -36,6 +48,13 @@
             border-radius: $border-radius;
             box-shadow: $border-shadow;
 
+            @media (max-width: $breakpoint-laptop) {
+                width: 90%;
+                top: unset;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
             .detailsPage_information_wrapper_header {
                 @include flexDirection(row);
                 justify-content: space-between;
@@ -43,12 +62,25 @@
 
                 position: relative;
 
+                @media (max-width: $breakpoint-laptop) {
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                    height: 280px;
+                    flex-wrap: nowrap;
+                }
+
                 span:nth-child(2) {
                     @include flexDirection(row);
                     position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
+
+                    @media (max-width: $breakpoint-laptop) {
+                        transform: unset;
+                        position: unset;
+                    }
 
                     & > div {
                         margin: 0 10px;
@@ -64,6 +96,11 @@
                         border: 1px solid $color-black-alpha;
                         fill: $color-black-alpha;
 
+                        @media (max-width: $breakpoint-laptop) {
+                            height: 50px;
+                            width: 50px;
+                        }
+
                         &:hover {
                             cursor: pointer;
                             border: 1px solid $color-black;
@@ -75,6 +112,10 @@
                 span:nth-child(3) {
                     @include flexDirection(column);
                     align-items: flex-end;
+
+                    @media (max-width: $breakpoint-laptop) {
+                        align-items: center;
+                    }
                 }
             }
 
@@ -88,13 +129,25 @@
                 margin-top: 40px;
                 gap: 100px;
 
+                @media (max-width: $breakpoint-laptop) {
+                    flex-direction: column;
+                }
+
                 .information_text {
                     width: 90%;
+
+                    @media (max-width: $breakpoint-laptop) {
+                        width: 100%;
+                    }
                 }
                 
                 .information_contact {
                     width: 300px;
                     height: fit-content;
+
+                    @media (max-width: $breakpoint-laptop) {
+                        width: 300px;
+                    }
 
                     header {
                         font-size: 1.5rem;

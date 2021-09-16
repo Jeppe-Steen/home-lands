@@ -1,10 +1,15 @@
-// Style
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { useEffect } from 'react/cjs/react.development';
+
+// Components
+import { ModalEdit } from '../../Components/ModalEdit/ModalEdit';
 import { MyLiked } from '../../Components/MyLiked/MyLiked';
 import { MyReviews } from '../../Components/MyReviews/MyReviews';
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
+
+// Style
 import Style from './Adminpage.module.scss';
 
 const Adminpage = () => {
@@ -36,6 +41,7 @@ const Adminpage = () => {
                         <h3>Anmeldelser</h3>
                     </header>
                     <MyReviews />
+                    <ModalEdit />
                 </article>
                 <article className={Style.adminPage_section_liked}>
                     <header>

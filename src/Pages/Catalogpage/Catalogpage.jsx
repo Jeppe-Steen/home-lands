@@ -1,18 +1,27 @@
+import { useEffect, useState, useContext } from 'react';
+
 // Style
-import { useEffect, useState } from 'react';
 import Style from './Catalogpage.module.scss';
 
+// Helpers
 import { doFetch } from '../../Helpers/Fetching';
 
+// Components
 import { ListItems } from '../../Components/ListItems/ListItems';
-import { useContext } from 'react/cjs/react.development';
+import { RangedSlider } from '../../Components/RangedSlider/RangedSlider';
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
 
 const Catalogpage = () => {
     const [houses, setHouses] = useState([]);
     const [filteredHouses, setFilteredHouses] = useState([]);
+    const [priceFilteredHouses, setPriceFilteredHouses] = useState([]);
     const [houseTypes, setHouseTypes] = useState([]);
     const [filter, setFilter] = useState('');
+
+    const [minVal, setMinVal] = useState(0);
+    const [maxVal, setMaxVal] = useState(0);
 
     const { searchData, setSearchData } = useContext(AppContext);
 
@@ -70,10 +79,7 @@ const Catalogpage = () => {
                 <div className={Style.catalogPage_header_sorting}>
                     <span className={Style.catalogpage_header_slider}>
                         <label>Sorter efter prisniveau:</label>
-                        <span className={Style.rangeSlider}>
-                            <input type="range" />
-                            <input type="range" />
-                        </span>
+                        <RangedSlider houses={filteredHouses} setMinVal={setMinVal} setMaxVal={setMaxVal} />
                     </span>
                     <select className={Style.catalogPage_header_sorting_select} onChange={(e) => setFilter(e.target.value)}>
                         <option value="" selected disabled>Sorter efter type</option>
@@ -90,9 +96,11 @@ const Catalogpage = () => {
             <section className={Style.catalogPage_section}>
                 <ul>
                     {filteredHouses.length ? filteredHouses.map((house, index) => {
-                        return (
-                            <ListItems key={index} data={house}/>
-                        )
+                        if(house.price >= minVal) {
+                            return (
+                                <ListItems key={index} data={house}/>
+                            )
+                        } else { return false }
                     }) : null}
                 </ul>
             </section>

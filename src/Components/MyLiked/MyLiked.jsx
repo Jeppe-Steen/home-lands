@@ -1,7 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
+
+// Style
 import Style from './MyLiked.module.scss';
 
+// Helpers
 import { doFetch } from '../../Helpers/Fetching';
 
 const MyLiked = () => {

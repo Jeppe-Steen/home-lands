@@ -1,12 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
+
+// Context 
 import { AppContext } from '../../Context/ContextProvider';
+
+// Helpers
 import { doFetch } from '../../Helpers/Fetching';
+
+// Style
 import Style from './MyReviews.module.scss';
 
 const MyReviews = () => {
     const [reviews, setReviews] = useState([]);
     const [filteredReviews, setFilteredReviews] = useState([]);
-    const { loginData } = useContext(AppContext);
+    const { loginData, modalEditActive, setModalEditActive, setModalEditContent } = useContext(AppContext);
 
     const getReviews = async () => {
         const url = `https://api.mediehuset.net/homelands/reviews`;
@@ -14,12 +20,24 @@ const MyReviews = () => {
         setReviews(response);
     }
 
-    useEffect(() => {
+    const handleOpen = (item) => {
+        setModalEditContent(item);
+        console.log(item);
+        setModalEditActive(true);
+    }
+
+    const handleDelete = async (item) => {
+        const url = `https://api.mediehuset.net/homelands/reviews/${item}`;
+        const response = await doFetch(url, 'DELETE', null, loginData.access_token);
         getReviews();
-    }, [])
+    }
 
     useEffect(() => {
-        const filterReviews = reviews.filter(review => review.user_id === loginData.user_id);
+        getReviews();
+    }, [modalEditActive])
+
+    useEffect(() => {
+        const filterReviews = reviews.filter(review => loginData.user_id == review.user_id);
         setFilteredReviews(filterReviews)
     }, [reviews])
 
@@ -36,8 +54,8 @@ const MyReviews = () => {
                         <td>{review.title.slice(0, 35)}...</td>
                         <td>{review.content.slice(0, 10)}...</td>
                         <td>
-                            <button type="button"> Update </button>
-                            <button type="button"> Slet </button>
+                            <button onClick={() => handleOpen(review)} type="button"> Update </button>
+                            <button onClick={() => handleDelete(review.id)} type="button"> Slet </button>
                         </td>
                     </tr>
                 )

@@ -1,7 +1,13 @@
+@import '../../_scss/variables';
+
 .myReviews {
     margin-top: 10px;
     width: 90%;
     height: fit-content;
+
+    @media (max-width: $breakpoint-laptop) {
+     width: 100%;       
+    }
     
     tr {
         display: grid;
@@ -9,6 +15,13 @@
         text-align: start;
         padding: 5px 0;
         border-bottom: 1px solid grey;
+
+        @media (max-width: $breakpoint-laptop) {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto auto auto;
+            padding: 10px 0;
+        }
 
         th {
             text-align: start;

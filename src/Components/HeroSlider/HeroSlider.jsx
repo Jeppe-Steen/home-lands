@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+
+// Style
 import Style from './HeroSlider.module.scss'
 
+// Helpers
 import {doFetch} from '../../Helpers/Fetching';
 
 const HeroSlider = () => {

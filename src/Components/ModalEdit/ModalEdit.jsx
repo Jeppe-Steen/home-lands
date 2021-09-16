@@ -10,41 +10,48 @@ import { doFetch } from '../../Helpers/Fetching';
 import { RatingSystem } from '../RatingSystem/RatingSystem';
 
 // Style
-import Style from './Modal.module.scss';
+import Style from './ModalEdit.module.scss';
 
-const Modal = () => {
-    const [rating, setRating] = useState();
-    const { loginData, modalActive, setModalActive } = useContext(AppContext);
+const ModalEdit = () => {
+    const [rating, setRating] = useState(0);
+    const { loginData, modalEditActive, setModalEditActive, modalEditContent } = useContext(AppContext);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [id, setId] = useState('');
 
     const closeModal = () => {
-        setTitle('');
-        setContent('');
-        setModalActive(false);
+        setTitle(title);
+        setContent(content);
+        setModalEditActive(false);
     }
 
     const createReview = async () => {
         const url = `https://api.mediehuset.net/homelands/reviews`;
+
         const formData = new FormData();
+            formData.append('id', id);
             formData.append('title', title);
             formData.append('content', content);
-            formData.append('user_id', loginData.user_id);
-            formData.append('active', true);
             formData.append('num_stars', rating);
-        const response = await doFetch(url, 'POST', formData, loginData.access_token);
+            formData.append('active', 1);
+
+        const response = await doFetch(url, 'PUT', formData, loginData.access_token);
+        console.log(id);
+        console.log(response);
         closeModal();
-        return response;
     }
 
     useEffect(() => {
-        setRating(0);
-    }, [])
+        setRating(modalEditContent.num_stars);
+        setTitle(modalEditContent.title);
+        setContent(modalEditContent.content);
+        setId(modalEditContent.id)
+    }, [modalEditContent]);
 
 
     return (
-        <div className={modalActive ? `${Style.modal} ${Style.active}` : `${Style.modal}`}>
+        <div className={modalEditActive ? `${Style.modalEdit} ${Style.active}` : `${Style.modalEdit}`}>
             <form>
                 <input name="title" type="text" placeholder="Titel" value={title} onChange={(e) => setTitle(e.target.value)} />
                 <textarea name="content" placeholder="Kommentar" value={content} onChange={(e) => setContent(e.target.value)}>
@@ -61,4 +68,4 @@ const Modal = () => {
     )
 }
 
-export { Modal };
+export { ModalEdit };

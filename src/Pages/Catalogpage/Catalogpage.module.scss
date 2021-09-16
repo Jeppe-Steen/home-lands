@@ -10,12 +10,22 @@
         padding: 40px 100px;
         width: 100%;
 
+        @media (max-width: $breakpoint-laptop) {
+            @include flexDirection(column);
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+
         .catalogPage_header_sorting {
             @include flexDirection(row);
             align-items: center;
 
             & > * {
                 margin: 0 10px;
+
+                @media (max-width: $breakpoint-laptop) {
+                    margin: unset;
+                }
             }
 
             .catalogpage_header_slider {
@@ -24,23 +34,15 @@
 
                 & > * {
                     margin: 0 5px;
+
+                    @media (max-width: $breakpoint-laptop) {
+                        margin: unset;
+                    }
+
                 }
 
-
-                .rangeSlider {
-                    position: relative;
-                    width: 200px;
-                    height: 10px;
-
-                    input[type=range] {
-                        position: absolute;
-                        overflow: hidden;
-                        width: 100%;
-
-                        top: 50%;
-                        transform: translateY(-50%);
-                    
-                    }
+                @media (max-width: $breakpoint-laptop) {
+                    margin: 20px 0;
                 }
             }
 

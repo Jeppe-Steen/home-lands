@@ -1,8 +1,15 @@
+// Style
+import { useEffect } from 'react';
 import Style from './DetailsList.module.scss';
 
 const DetailsList = (props) => {
 
     const data = props.data;
+
+    const formatDate = (val) => {
+        const formattetDate = new Date(val * 1000);
+        console.log(formattetDate);
+    }
 
     const dataArray = [
         { value: data.id, print: 'Sagsnr.', prefix: '' },
@@ -14,13 +21,16 @@ const DetailsList = (props) => {
         { value: data.year_construction, print: 'Byggeår', prefix: '' },
         { value: data.year_rebuilt, print: 'Ombygget', prefix: '' },
         { value: data.energy_label_name, print: 'Energimærke', prefix: '' },
-        { value: '', print: 'Liggetid', prefix: 'dage' },
+        { value: data.date_stamp, print: 'Liggetid', prefix: 'dage' },
         { value: data.price, print: 'Kontantpris', prefix: '' },
         { value: data.payout, print: 'Udbetaling', prefix: '' },
         { value: data.gross, print: 'Brutto ex. ejerudgift', prefix: '' },
         { value: data.net, print: 'Netto ex. ejerudgift', prefix: '' },
         { value: data.cost, print: 'Ejerudgift', prefix: '' },
     ]
+
+    useEffect(() => {
+    }, []);
 
 
     return (

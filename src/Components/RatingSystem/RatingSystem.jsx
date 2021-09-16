@@ -1,5 +1,7 @@
-import Style from './RatingSystem.module.scss';
 import { useEffect, useState } from "react";
+
+// Style
+import Style from './RatingSystem.module.scss';
 
 const RatingSystem = (props) => {
     // the final selected rating
@@ -20,18 +22,23 @@ const RatingSystem = (props) => {
 
     useEffect(() => {
         setStars(dataArray)
-    }, []);
-
-    // mouse hover handler
-    // when the mouse hovers a star, then the hovered star and the stars before it, will change selected status to true  (only if there is no rating)
-    const handleMouseOver = ( placement ) => {
-        if (!rating) {
-            for (let i = 0; i <= placement - 1; i++) {
+        if(rating) {
+            for (let i = 0; i <= rating - 1; i++) {
                 dataArray[i].selected = true;
             };
     
             setStars(dataArray);
         }
+    }, [rating]);
+
+    // mouse hover handler
+    // when the mouse hovers a star, then the hovered star and the stars before it, will change selected status to true  (only if there is no rating)
+    const handleMouseOver = ( placement ) => {
+        for (let i = 0; i <= placement - 1; i++) {
+            dataArray[i].selected = true;
+        };
+
+        setStars(dataArray);
     };
 
     // mouse leave handler
@@ -43,27 +50,31 @@ const RatingSystem = (props) => {
             })
 
             setStars(dataArray);
+        } else {
+            for (let i = 0; i <= rating - 1; i++) {
+                dataArray[i].selected = true;
+            };
+    
+            setStars(dataArray);
         }
     };
 
     // mouse click handler
     // when a star is clicked, the star and the previous stars will change color, and then it sets the rating to the selected star
     const handleClick = ( placement ) => {
-        if (!rating) {
-            for (let i = 0; i <= placement - 1; i++) {
-                dataArray[i].selected = true;
-            };
-    
-            setStars(dataArray);
-            setRating(placement);
-        }
+        for (let i = 0; i <= placement - 1; i++) {
+            dataArray[i].selected = true;
+        };
+
+        setStars(dataArray);
+        setRating(placement);
     };
 
 
     return (
         <div>
             <span id="starSpan">
-                {stars.map((item, index) => {
+                {stars.map((item) => {
                     return (
                         <svg className={Style.starIcon} key={item.value} viewBox="0 0 117.34 111.59">
                             <polygon 

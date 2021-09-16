@@ -80,4 +80,34 @@ const Heart = (props) => {
     )
 }
 
-export { Camera, Location, Plan, Heart };
+const Facebook = () => {
+    return (
+        <p></p>
+    )
+}
+
+const Twitter = () => {
+    return (
+        <p></p>
+    )
+}
+
+const Search = () => {
+    return (
+        <p></p>
+    )
+}
+
+const Pen = () => {
+    return (
+        <p></p>
+    )
+}
+
+const Trash = () => {
+    return (
+        <p></p>
+    )
+}
+
+export { Camera, Location, Plan, Heart, Facebook, Twitter, Search, Pen, Trash };

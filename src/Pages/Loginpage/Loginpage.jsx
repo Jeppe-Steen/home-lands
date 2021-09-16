@@ -1,10 +1,14 @@
+import { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
+
 // Style
 import Style from './Loginpage.module.scss';
 
+// Helpers
 import { doFetch } from '../../Helpers/Fetching'; 
-import { useContext, useEffect } from 'react';
+
+// Context
 import { AppContext } from '../../Context/ContextProvider';
-import { useHistory } from 'react-router';
 
 const Loginpage = () => {
     const history = useHistory();

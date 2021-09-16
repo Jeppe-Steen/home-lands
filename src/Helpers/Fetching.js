@@ -3,7 +3,7 @@ export const doFetch = async (fetchUrl, fetchMethod = 'GET', fetchData = null, f
         method: fetchMethod,
         body: fetchData,
         headers: {
-            'authorization': `Bearer ${fetchKey}`
+            'Authorization': `Bearer ${fetchKey}`
         }
     };
 
@@ -12,11 +12,14 @@ export const doFetch = async (fetchUrl, fetchMethod = 'GET', fetchData = null, f
 
     if(data.items) {
         return data.items
-    } else if(data.item) {
+    } 
+    else if(data.item) {
         return data.item
-    } else if(data.error){
+    } 
+    else if (data.error) {
         return []
-    } else if(data) {
+    } 
+    else {
         return data;
     }
 }

@@ -2,10 +2,15 @@
 
 .adminPage {
     margin-top: 20vh;
+    padding-bottom: 40px;
 
     .adminPage_header {
         padding: 40px 100px;
         width: 100%;
+
+        @media (max-width: $breakpoint-laptop) {
+            padding: 40px 50px 40px 50px;
+        }
     }
 
     .adminPage_section {
@@ -16,12 +21,29 @@
 
         padding: 0 100px;
 
+        @media (max-width: $breakpoint-laptop) {
+            grid-template: auto auto auto / 100%;
+            grid-template-areas: 'login' 'reviews' 'liked';
+            padding: 0 40px;
+        }
+
         .adminPage_section_reviews { grid-area: reviews; }
+        
         .adminPage_section_liked { grid-area: liked; }
+
         .adminPage_section_login { 
             grid-area: login; 
             border-left: 1px solid black; 
             padding-left: 40px; 
+
+            @media (max-width: $breakpoint-laptop) {
+                border-bottom: 1px solid black;
+                border-left: unset;
+                padding: 0 0 20px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
 
             button {
                 padding: 10px 15px;
@@ -41,6 +63,10 @@
 
         article {
             min-height: 30vh;
+
+            @media (max-width: $breakpoint-laptop) {
+                margin-top: 20px;
+            }
         }
     }
 }

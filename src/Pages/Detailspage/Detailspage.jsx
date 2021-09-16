@@ -1,12 +1,22 @@
-// Style
+
 import { useContext, useEffect, useState } from 'react';
-import { DetailsImageSlider } from '../../Components/DetailsImageSlider/DetailsImageSlider';
-import Style from './Detailspage.module.scss';
-import { AppContext } from '../../Context/ContextProvider';
 import { useHistory } from 'react-router';
-import { Camera, Location, Plan, Heart } from '../../Assets/Icons';
-import { doFetch } from '../../Helpers/Fetching';
+
+// Components
+import { DetailsImageSlider } from '../../Components/DetailsImageSlider/DetailsImageSlider';
 import { DetailsList } from '../../Components/DetailsList/DetailsList';
+
+// Style
+import Style from './Detailspage.module.scss';
+
+// Context
+import { AppContext } from '../../Context/ContextProvider';
+
+// Assets
+import { Camera, Location, Plan, Heart } from '../../Assets/Icons';
+
+// Helpers
+import { doFetch } from '../../Helpers/Fetching';
 
 const Detailspage = () => {
     const { selectedHouse, loginData, setPictureArray, pictureActive, setPictureActive } = useContext(AppContext);
@@ -92,7 +102,7 @@ const Detailspage = () => {
                     {houseDetails.id ? 
                         <div className={Style.information}>
                             <p className={Style.information_text}>
-                                {houseDetails && houseDetails.description}
+                                {houseDetails && houseDetails.description.slice(0, 1500)}...
                             </p>
 
                             <figure className={Style.information_contact}>
