@@ -25,6 +25,7 @@ const ListItems = (props) => {
     const addViews = async () => {
         const url = `https://api.mediehuset.net/homelands/homes/${data.id}`;
         const response = await doFetch(url, 'PATCH', null, loginData.access_token);
+        console.log(response);
         return response;
     }
 
@@ -35,7 +36,7 @@ const ListItems = (props) => {
         if(loginData.user_id) {
             addViews();
         }
-        
+
         history.push(`/Udvalg/${data.address}`);
     };
 

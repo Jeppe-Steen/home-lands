@@ -48,22 +48,26 @@ const MyLiked = () => {
 
     return (
         <table className={Style.myLiked}>
-            <tr>
-                <th>Titel</th>
-                <th>Dato</th>
-                <th>Handling</th>
-            </tr>
-            {likedHouses.length ? likedHouses.map((house, index) => {
-                return (
-                    <tr key={index}>
-                        <td>{house.address}, {house.city} {house.zipcode}</td>
-                        <td>{house.price}</td>
-                        <td>
-                            <Trash func={handleDelete} data={house.home_id} />
-                        </td>
-                    </tr>
-                )
-            }) : null }
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Dato</th>
+                    <th>Handling</th>
+                </tr>
+            </thead>
+            <tbody>
+                {likedHouses.length ? likedHouses.map((house, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{house.address}, {house.city} {house.zipcode}</td>
+                            <td>{house.price}</td>
+                            <td>
+                                <Trash func={handleDelete} data={house.home_id} />
+                            </td>
+                        </tr>
+                    )
+                }) : null }
+            </tbody>
         </table>
     )
 }

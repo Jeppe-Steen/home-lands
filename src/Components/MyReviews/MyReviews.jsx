@@ -44,23 +44,27 @@ const MyReviews = () => {
 
     return (
         <table className={Style.myReviews}>
-            <tr>
-                <th>Titel</th>
-                <th>Anmeldelse</th>
-                <th>Handling</th>
-            </tr>
-            {filteredReviews.length ? filteredReviews.map((review, index) => {
-                return (
-                    <tr key={index}>
-                        <td>{review.title.slice(0, 35)}...</td>
-                        <td>{review.content.slice(0, 10)}...</td>
-                        <td>
-                            <Pen func={handleOpen} data={review} />
-                            <Trash func={handleDelete} data={review.id} />
-                        </td>
-                    </tr>
-                )
-            }) : null }
+            <thead>
+                <tr>
+                    <th>Titel</th>
+                    <th>Anmeldelse</th>
+                    <th>Handling</th>
+                </tr>
+            </thead>
+            <tbody>
+                {filteredReviews.length ? filteredReviews.map((review, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{review.title.slice(0, 35)}...</td>
+                            <td>{review.content.slice(0, 10)}...</td>
+                            <td>
+                                <Pen func={handleOpen} data={review} />
+                                <Trash func={handleDelete} data={review.id} />
+                            </td>
+                        </tr>
+                    )
+                }) : null }
+            </tbody>
         </table>
     )
 }
