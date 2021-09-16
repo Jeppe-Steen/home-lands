@@ -10,6 +10,9 @@ import Style from './Navigation.module.scss';
 // Components
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 
+// Assets
+import { Search } from '../../Assets/Icons';
+
 const Navigation = () => {
     const { loginData, setSearchData } = useContext(AppContext);
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -61,7 +64,9 @@ const Navigation = () => {
                     <li className={Style.pageNavigation_linkItem}>
                         <span className={Style.pageNavigation_linkItem_span}>
                             <input id="search" onKeyUp={(e) => handleSearch(e.target.value)} type="text" placeholder="Søgefelt"/>
-                            <button onClick={search} type="button">Søg</button>
+                            <button onClick={search} type="button">
+                                <Search />
+                            </button>
                         </span>
                     </li>
                 </ul>

@@ -13,3 +13,21 @@
         fill: red
     }
 }
+
+.search {
+    height: 20px;
+    width: 20px;
+    fill: white;
+}
+
+.trash, .pen {
+    height: 20px;
+    cursor: pointer;
+}
+
+.twitter, .facebook {
+    height: 40px;
+    width: 40px;
+    fill: white;
+    cursor: pointer;
+}

@@ -15,6 +15,7 @@
         text-align: start;
         padding: 5px 0;
         border-bottom: 1px solid grey;
+        align-items: center;
 
         @media (max-width: $breakpoint-laptop) {
             display: grid;
@@ -33,10 +34,6 @@
 
         td {
             text-align: start;
-
-            & > * {
-                width: 48%;
-            }
         }
     }
 }

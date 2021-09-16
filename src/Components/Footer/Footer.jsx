@@ -1,6 +1,9 @@
 // Style
 import Style from './Footer.module.scss';
 
+// Assets
+import { Twitter, Facebook } from '../../Assets/Icons';
+
 const Footer = () => {
     const footerData = {
         address: 'Øster Uttrupvej 5',
@@ -25,8 +28,8 @@ const Footer = () => {
             </ul>
 
             <span className={Style.pageFooter_socialIcons}>
-                <p>Twitter</p>
-                <p>Facebook</p>
+                <Twitter />
+                <Facebook />
             </span>
         </footer>
     )

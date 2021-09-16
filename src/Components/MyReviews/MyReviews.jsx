@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { Pen, Trash } from '../../Assets/Icons';
 
 // Context 
 import { AppContext } from '../../Context/ContextProvider';
@@ -22,8 +23,8 @@ const MyReviews = () => {
 
     const handleOpen = (item) => {
         setModalEditContent(item);
-        console.log(item);
         setModalEditActive(true);
+        console.log('something is happening');
     }
 
     const handleDelete = async (item) => {
@@ -54,8 +55,8 @@ const MyReviews = () => {
                         <td>{review.title.slice(0, 35)}...</td>
                         <td>{review.content.slice(0, 10)}...</td>
                         <td>
-                            <button onClick={() => handleOpen(review)} type="button"> Update </button>
-                            <button onClick={() => handleDelete(review.id)} type="button"> Slet </button>
+                            <Pen func={handleOpen} data={review} />
+                            <Trash func={handleDelete} data={review.id} />
                         </td>
                     </tr>
                 )

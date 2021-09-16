@@ -56,7 +56,7 @@
         border: 1px solid black;
     }
 
-    input[type=range]::-ms-track {
+    input[type=range]::-ms-thumb {
         appearance: none;
         height: 15px;
         width: 15px;
@@ -69,7 +69,7 @@
         border: 1px solid black;
     }
 
-    input[type=range]::-moz-range-track {
+    input[type=range]::-moz-range-thumb {
         -moz-appearance: none;
         height: 15px;
         width: 15px;

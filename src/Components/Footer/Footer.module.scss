@@ -65,8 +65,8 @@
             position: unset;
         }
 
-        p {
-            margin-left: 10px;
+        & > * {
+            margin-left: 20px;
 
             &:first-child {
                 margin: none;

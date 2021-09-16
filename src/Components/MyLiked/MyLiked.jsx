@@ -8,6 +8,7 @@ import Style from './MyLiked.module.scss';
 
 // Helpers
 import { doFetch } from '../../Helpers/Fetching';
+import { Trash } from '../../Assets/Icons';
 
 const MyLiked = () => {
     const { loginData, setFavList } = useContext(AppContext);
@@ -58,7 +59,7 @@ const MyLiked = () => {
                         <td>{house.address}, {house.city} {house.zipcode}</td>
                         <td>{house.price}</td>
                         <td>
-                            <button type="button" onClick={() => handleDelete(house.home_id)}> Slet </button>
+                            <Trash func={handleDelete} data={house.home_id} />
                         </td>
                     </tr>
                 )

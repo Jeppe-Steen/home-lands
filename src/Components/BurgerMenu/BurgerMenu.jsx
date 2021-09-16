@@ -1,18 +1,8 @@
-import { useEffect, useState } from 'react';
 import Style from './BurgerMenu.module.scss';
 
 const BurgerMenu = (props) => {
     const menuActive = props.toggleMenu;
     const setMenuActive = props.setToggleMenu;
-
-    useEffect(() => {
-        const menuItems = [...document.querySelector('#menu').children]
-        console.log(menuItems)
-
-        menuItems.forEach(item => {
-            console.log(item.getTotalLength())
-        })
-    }, [menuActive])
 
     const handleClick = () => {
         setMenuActive(!menuActive)
