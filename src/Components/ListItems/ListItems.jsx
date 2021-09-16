@@ -10,6 +10,9 @@ import { AppContext } from '../../Context/ContextProvider';
 // Assets
 import { Heart } from '../../Assets/Heart';
 
+// Helpers
+import { doFetch } from '../../Helpers/Fetching';
+
 const ListItems = (props) => {
     const data = props.data;
     const history = useHistory();
@@ -18,9 +21,21 @@ const ListItems = (props) => {
 
     const [energyColor, setEnergyColor] = useState('');
     const [price, setPrice] = useState('');
+    
+    const addViews = async () => {
+        const url = `https://api.mediehuset.net/homelands/homes/${data.id}`;
+        const response = await doFetch(url, 'PATCH', null, loginData.access_token);
+        return response;
+    }
+
 
     const handleClick = () => {
         setSelectedHouse(data);
+
+        if(loginData.user_id) {
+            addViews();
+        }
+        
         history.push(`/Udvalg/${data.address}`);
     };
 
