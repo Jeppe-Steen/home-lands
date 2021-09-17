@@ -113,11 +113,11 @@ const Catalogpage = () => {
             <section className={Style.catalogPage_section}>
                 <ul>
                     {filteredHouses.length ? filteredHouses.map((house, index) => {
-                        if(parseInt(house.price) <= maxPrice && parseInt(house.price) >= minPrice) {
+                        { /* if(parseInt(house.price) <= maxPrice && parseInt(house.price) >= minPrice) { */ }
                             return (
                                 <ListItems key={index} data={house}/>
                             )
-                        } else { return null }
+                        { /*} else { return null }*/ }
                     }) : null}
                 </ul>
             </section>
